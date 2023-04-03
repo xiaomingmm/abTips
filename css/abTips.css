@@ -1,0 +1,43 @@
+.abTips-arrow-top-left, .abTips-arrow-top-center, .abTips-arrow-top-right,
+.abTips-arrow-right-up, .abTips-arrow-right-center, .abTips-arrow-right-down,
+.abTips-arrow-bottom-left, .abTips-arrow-bottom-center, .abTips-arrow-bottom-right,
+.abTips-arrow-left-up, .abTips-arrow-left-center, .abTips-arrow-left-down { opacity:0.8;-moz-opacity: 0.8;-webkit-opacity: 0.8;-khtml-opacity: 0.8;filter:alpha(opacity=50); width:0; height:0; line-height:0; border:5px dashed #212121; position:absolute; }
+
+.abTips-arrow-top-left, .abTips-arrow-top-center, .abTips-arrow-top-right { top:0; margin-left:-3px; border-bottom-style:solid; border-top:0; border-left-color:transparent; border-right-color:transparent; }
+/* 顶部-居左 */
+.abTips-arrow-top-left { left:20%; }
+/* 顶部-居中 */
+.abTips-arrow-top-center { left:50%; }
+/* 顶部-居右 */
+.abTips-arrow-top-right { right:20%; }
+
+
+.abTips-arrow-right-up, .abTips-arrow-right-center, .abTips-arrow-right-down { right:0; border-left-style:solid; border-right:0; border-bottom-color:transparent; border-top-color:transparent; }
+/* 右边-居上 */
+.abTips-arrow-right-up { top:25%; margin-bottom:-5px; }
+/* 右边-居中 */
+.abTips-arrow-right-center { bottom:50%; margin-bottom:-5px; }
+/* 右边-居下 */
+.abTips-arrow-right-down { bottom:25%; margin-top:-5px; }
+
+
+.abTips-arrow-bottom-left, .abTips-arrow-bottom-center, .abTips-arrow-bottom-right { bottom:0; margin-right:-3px; border-top-style:solid; border-bottom:0; border-left-color:transparent; border-right-color:transparent; }
+/* 底部-居左 */
+.abTips-arrow-bottom-left { left:20%; }
+/* 底部-居中 */
+.abTips-arrow-bottom-center { right:50%; }
+/* 底部-居右 */
+.abTips-arrow-bottom-right { right:20%; }
+
+
+.abTips-arrow-left-up, .abTips-arrow-left-center, .abTips-arrow-left-down { left:0; border-right-style:solid; border-left:0; border-top-color:transparent; border-bottom-color:transparent; }
+/* 左边-居上 */
+.abTips-arrow-left-up { top:25%; margin-bottom:-5px; }
+/* 左边-居中 */
+.abTips-arrow-left-center { bottom:50%; margin-bottom:-5px; }
+/* 左边-居下 */
+.abTips-arrow-left-down { bottom:25%; margin-top:-5px; }
+
+
+/* 描述文本 */
+.abTips-layer-text { opacity:0.8;-moz-opacity: 0.8;-webkit-opacity: 0.8;-khtml-opacity: 0.8;filter:alpha(opacity=50); line-height:1.5; padding:5px 10px; background-color:#212121; color:#fff; font-size:12px; font-family:Consolas,"Courier New",Courier,mono,serif!important; z-index:999999999; border-radius:3px; }

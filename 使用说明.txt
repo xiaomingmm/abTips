@@ -1,15 +1,14 @@
-# abTips
 
-* abTips v1.2 文本描述提示插件
-* 更多详尽信息请看官网( http://ab.geshai.com/other-plus/abTips )
-*
-* 有疑难问题可选择QQ群① 158544200 或QQ群② 790370978 进行反馈
-*
-* Copyright Carlo,Cloud
-*
-* 请尊重原创，保留头部版权
-* 在保留版权的前提下，可应用于个人或商业用途
-
+ * abTips v1.2 文本描述提示插件
+ * 更多详尽信息请看官网( http://ab.geshai.com/other-plus/abTips )
+ *
+ * 有疑难问题可选择QQ群① 158544200 或QQ群② 790370978 进行反馈
+ *
+ * Copyright Carlo,Cloud
+ *
+ * 请尊重原创，保留头部版权
+ * 在保留版权的前提下，可应用于个人或商业用途
+ 
 
 -------------------------------------------------------------------------------
 
@@ -26,20 +25,19 @@ abTips基于jquery运行的文本描述提示插件。
 使用说明以及注意事项如下：
 
 1、首先引用jQuery v1.8.3+版本 ( 更低版本能兼容到jQuery1.43推荐使用jQuery1.8.3 )
-jQuery目录地址  js/jquery-1.8.3.min.js
+	jQuery目录地址  js/jquery-1.8.3.min.js
 
 2、引用abTips Js文件
-插件JS目录地址如下
-js/abTips-v1.2.js   开发版
-js/abTips-v1.2.min.js   压缩迷你版（推荐使用）
+	插件JS目录地址如下
+	js/abTips-v1.2.js   开发版
+	js/abTips-v1.2.min.js   压缩迷你版（推荐使用）
 
 3、引用abTips Css文件
-插件Css目录地址如下
-css/abTips.css   (此文件为插件提示框箭头等样式文件)
+	插件Css目录地址如下
+	css/abTips.css   (此文件为插件提示框箭头等样式文件)
 
 
 -------------------------------------------------------------------------------
 
 
 预计下个版本 增加提示框支持图文显示
-

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>abTips实例演示页 - 格晒特效插件</title>
+<meta name="keywords" content="abTips,文本描述插件,描述提示插件,格晒特效,格晒插件,jQuery插件" />
+<meta name="description" content="abTips是一个基于jquery运行的文本描述提示插件。支持多种定位默认获取title信息，可自定义需获取的信息标签。支持跟随鼠标位置提示以及固定位置提示。插件自动检测是否处于浏览器窗口边缘，确保提示框总是停留在可见区域。兼容IE6+ Safari Opera Firefox Chrome 等大部分浏览器。" />
+<link href="css/abTips.css" rel="stylesheet" type="text/css" /><!-- 必须存在1 -->
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script><!-- 必须存在2 -->
+<script type="text/javascript" src="js/abTips-v1.2.min.js"></script><!-- 必须存在3 -->
+</head>
+<style type="text/css">
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,code,del,dfn,em,img,q,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;letter-spacing:.03em}table{border-collapse:collapse;border-spacing:0}p{word-wrap:break-word}em,i{font-style:normal}li{list-style:none}img{border:0;vertical-align:top}h1,h2,h3,h4,h5,h6{font-weight:100}.clearfix:before,.clearfix:after{content:"";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.clear{height:0;clear:both;overflow:hidden}body{background:#0c91e8;color:#fff;font:12px/18px "microsoft yahei","SimHei","SimSun";-webkit-text-size-adjust:100%;min-width:1200px;letter-spacing:.03em}ul,li{list-style:none}p{word-wrap:break-word}img{border:0;vertical-align:middle}a{color:#eef7fe;text-decoration:none}a:hover{color:#fff;text-decoration:none}.cj-soft a{color:#183b52;font-style:normal;text-decoration:none}.cj-soft a:hover{color:#4ad585;text-decoration:none}.h100{height:100px;overflow:hidden}#tbox2{width:42px;height:42px;margin:0 auto 0 auto}#gotop2{width:42px;height:42px;line-height:42px;font-weight:500;background:#3dc878;display:block;font-size:12px;font-style:italic;color:#fff;text-align:center;border-radius:50px;box-shadow:0px 4px 10px 0px rgba(16,124,195,1);-webkit-box-shadow:0px 4px 10px 0px rgba(16,124,195,1);-moz-box-shadow:0px 4px 10px 0px rgba(16,124,195,1)}#gotop2:hover{background:#4ad585;color:#fff}.demo-text{width:1200px;margin:0 auto;text-align:center}.demo-text h6{font-size:18px;height:60px;line-height:50px;color:#183b52;font-weight:700;font-style:italic;letter-spacing:.05em}.demo-text p{font-family:Consolas,"Courier New",Courier,mono,serif!important;color:#183b52;line-height:24px;font-size:12px;padding:0 200px 60px 200px}.demo-text p a{color:#183b52}.demo-text p a:hover{color:#4ad585;text-decoration:underline}.demo-main{width:1200px;margin:0 auto;padding:100px 0 140px 0}.demo-tit{text-align:center;font-size:24px;height:120px;line-height:120px;font-weight:bold;letter-spacing:.05em;font-style:italic;color:#183b52}.demo-tit h2{text-align:center;font-size:24px;height:120px;line-height:120px;font-weight:bold;letter-spacing:.05em;color:#183b52}.demo-tit h2 a{font-size:14px;height:120px;line-height:120px;font-weight:500;color:#065589;padding-left:20px}.demo-tit h2 a:hover{color:#183b52;text-decoration:underline}.demo-tit p a{font-size:24px;height:120px;line-height:120px;font-weight:bold;color:#183b52;letter-spacing:.05em;margin:0 50px}.demo-tit p a:hover{color:#fff;text-decoration:underline}.demo-tit h3{font-size:24px;height:50px;line-height:50px;font-weight:bold;color:#ECF7FF;letter-spacing:.05em}.demo-tit h3 a{color:#ECF7FF}.demo-tit h3 a:hover{color:#fff;text-decoration:underline}.demo-tit h3 span.a2{font-size:12px;color:#0d79c0;padding:0 30px}
+/* 以上默认全局可替换为你自己的 */
+
+
+/* 以下为此演示页面例子箭头显示样式 */
+
+.abTips-layer { font-family: Consolas,"Courier New",Courier,mono,serif!important; font-size:12px; line-height:1.5; padding:5px; position:absolute; }
+.demo-abTips-box { width:805px; margin:0 auto; }
+.demo-abTips-box li { width:245px; height:42px; line-height:42px; position:relative; margin:0 0 20px 0; padding:0 10px; float:left; display:block; }
+	.demo-abTips-box li a { height:42px; line-height:42px; padding:0 20px; display:block; color:#fff; border-radius:8px; text-align:center; }
+	.demo-abTips-box li a:hover { color:#fff; }
+	
+.abTips-textArea, .abTips-textArea2, .abTips-textArea3, .abTips-textArea4 { height:42px; line-height:42px; color:#fff; border-radius:8px; text-align:center; box-shadow:0 2px 10px #eee; word-break:break-all; }
+	
+.abTips-textArea { background-color:#f9729e; }
+.abTips-textArea2 { background-color:#fbbe71; }
+.abTips-textArea3 { background-color:#55e5ee; }
+.abTips-textArea4 { background-color:#da8bf8; }
+
+.abTips-arrow-top-left1, .abTips-arrow-top-center1, .abTips-arrow-top-right1,
+.abTips-arrow-right-up1, .abTips-arrow-right-center1, .abTips-arrow-right-down1,
+.abTips-arrow-bottom-left1, .abTips-arrow-bottom-center1, .abTips-arrow-bottom-right1,
+.abTips-arrow-left-up1, .abTips-arrow-left-center1, .abTips-arrow-left-down1 { width:0; height:0; line-height:0; position:absolute; }
+
+.abTips-arrow-top-left1, .abTips-arrow-top-center1, .abTips-arrow-top-right1 { border:5px dashed #f9729e; top:0; margin-left:-3px; border-bottom-style:solid; border-top:0; border-left-color:transparent; border-right-color:transparent; }
+.abTips-arrow-top-left1 { left:20%; } /* 顶部-居左 */
+.abTips-arrow-top-center1 { left:50%; } /* 顶部-居中 */
+.abTips-arrow-top-right1 { right:20%; } /* 顶部-居右 */
+
+.abTips-arrow-right-up1, .abTips-arrow-right-center1, .abTips-arrow-right-down1 { border:5px dashed #fbbe71; right:0; border-left-style:solid; border-right:0; border-bottom-color:transparent; border-top-color:transparent; }
+.abTips-arrow-right-up1 { top:25%; margin-bottom:-5px; } /* 右边-居上 */
+.abTips-arrow-right-center1 { bottom:50%; margin-bottom:-5px; } /* 右边-居中 */
+.abTips-arrow-right-down1 { bottom:25%; margin-top:-5px; } /* 右边-居下 */
+
+.abTips-arrow-bottom-left1, .abTips-arrow-bottom-center1, .abTips-arrow-bottom-right1 { border:5px dashed #55e5ee; bottom:0; margin-right:-3px; border-top-style:solid; border-bottom:0; border-left-color:transparent; border-right-color:transparent; }
+.abTips-arrow-bottom-left1 { left:20%; } /* 底部-居左 */
+.abTips-arrow-bottom-center1 { right:50%; } /* 底部-居中 */
+.abTips-arrow-bottom-right1 { right:20%; } /* 底部-居右 */
+
+
+.abTips-arrow-left-up1, .abTips-arrow-left-center1, .abTips-arrow-left-down1 { border:5px dashed #da8bf8; left:0; border-right-style:solid; border-left:0; border-top-color:transparent; border-bottom-color:transparent; }
+.abTips-arrow-left-up1 { top:25%; margin-bottom:-5px; } /* 左边-居上 */
+.abTips-arrow-left-center1 { bottom:50%; margin-bottom:-5px; } /* 左边-居中 */
+.abTips-arrow-left-down1 { bottom:25%; margin-top:-5px; } /* 左边-居下 */
+
+
+
+
+.mddw-body { width:880px; margin:0 auto; height:240px; padding:50px 0; background:#fff; border-radius:50px; box-shadow:0 6px 20px #107cc3; }
+.demo-main h4 { text-align:center; font-size:24px; height:70px; line-height:50px; font-weight:700; letter-spacing:.05em; font-style:italic; color:#183b52; }
+
+	
+</style>
+<body>
+
+<!-- 头部开始 -->
+<div style="text-align:center;padding:80px 0 20px 0;"><div class="logo z"><h2 style="color:#ebf7fe;font-size:38px;line-height:50px;font-weight:bold;font-style:italic;"><a href="http://ab.geshai.com/other-plus/abTips" title="abTips v1.2" target="_blank">abTips</a></h2><p style="font-size:13px;font-style:italic;color:#ddf0fb;">文本描述提示插件 v1.2</p></div></div><div class="clear"></div>
+<!-- 头部结束 -->
+
+
+<div class="demo-main">
+<div class="h50"></div>
+<!--方向箭头-->
+<div class="demo-js-area" style="margin:0 auto 100px auto;width:880px;font-size:12px;color:#29c;">
+<h4>箭头位置演示</h4>
+<div style="text-align:center;font-size:12px;font-family:Consolas,"Courier New",Courier,mono,serif!important;">
+    <p style="padding:0 130px 30px 130px;line-height:24px;color:#183b52;padding-bottom:30px;">调用时offsetX可设置X 轴偏移(默认=0)，offsetY可设置Y 轴偏移(默认=0)。speed可设置过度效果(默认=250)，maxWidth为提示框最大宽度，isMouse=true跟随鼠标(默认=false固定位置)<br><br>设置提示框方向direction=可选top上、right右、bottom下、left左。direction=top或bottom时align=可选left、center、right， direction=left或right时align=可选top、center、bottom。</p>
+</div>
+
+<div class="mddw-body">
+<div class="demo-abTips-box">
+    <ul>
+        <li>
+            <div class="abTips-layer">
+                <div class="abTips-arrow-top-left1"></div>
+                <div class="abTips-textArea"><a href="javascript:;" ab-text-top-left1="顶部-居左<br>abTips-arrow-top-left">abTips-arrow-top-left</a></div>    
+            </div>
+        </li>
+        <li>
+            <div class="abTips-layer">
+                <div class="abTips-arrow-top-center1"></div>
+                <div class="abTips-textArea"><a href="javascript:;" ab-text-top-center1="顶部-居中<br>abTips-arrow-top-center">abTips-arrow-top-center</a></div>    
+            </div>
+        </li>
+        <li>
+            <div class="abTips-layer">
+                <div class="abTips-arrow-top-right1"></div>
+                <div class="abTips-textArea"><a href="javascript:;" ab-text-top-right1="顶部-居右<br>abTips-arrow-top-right">abTips-arrow-top-right</a></div>    
+            </div>
+        </li>
+        
+        
+        
+        
+        <li>
+            <div class="abTips-layer">
+                <div class="abTips-arrow-right-up1"></div>
+                <div class="abTips-textArea2"><a href="javascript:;" ab-text-right-up1="右边-居上<br>abTips-arrow-right-up">abTips-arrow-right-up</a></div>    
+            </div>
+        </li>
+
+        <li>
+            <div class="abTips-layer">
+                <div class="abTips-arrow-right-center1"></div>
+                <div class="abTips-textArea2"><a href="javascript:;" ab-text-right-center1="右边-居中<br>abTips-arrow-right-center">abTips-arrow-right-center</a></div>    
+            </div>
+        </li>
+        <li>
+            <div class="abTips-layer">
+                <div class="abTips-arrow-right-down1"></div>
+                <div class="abTips-textArea2"><a href="javascript:;" ab-text-right-down1="右边-居下<br>abTips-arrow-right-down">abTips-arrow-right-down</a></div>    
+            </div>
+        </li>
+        
+        
+        
+        
+        <li>
+            <div class="abTips-layer">
+                <div class="abTips-arrow-bottom-left1"></div>
+                <div class="abTips-textArea3"><a href="javascript:;" ab-text-bottom-left1="底部-居左<br>abTips-arrow-bottom-left">abTips-arrow-bottom-left</a></div>    
+            </div>
+        </li>
+        <li>
+            <div class="abTips-layer">
+                <div class="abTips-arrow-bottom-center1"></div>
+                <div class="abTips-textArea3"><a href="javascript:;" ab-text-bottom-center1="底部-居中<br>abTips-arrow-bottom-center">abTips-arrow-bottom-center</a></div>    
+            </div>
+        </li>
+        
+        <li>
+            <div class="abTips-layer">
+                <div class="abTips-arrow-bottom-right1"></div>
+                <div class="abTips-textArea3"><a href="javascript:;" ab-text-bottom-right1="底部-居右<br>abTips-arrow-bottom-right">abTips-arrow-bottom-right</a></div>    
+            </div>
+        </li>
+        
+        
+        
+        
+        <li>
+            <div class="abTips-layer">
+                <div class="abTips-arrow-left-up1"></div>
+                <div class="abTips-textArea4"><a href="javascript:;" ab-text-left-up1="左边-居上<br>abTips-arrow-left-up">abTips-arrow-left-up</a></div>
+            </div>
+        </li>
+        <li>
+            <div class="abTips-layer">
+                <div class="abTips-arrow-left-center1"></div>
+                <div class="abTips-textArea4"><a href="javascript:;" ab-text-left-center1="左边-居中<br>abTips-arrow-left-center">abTips-arrow-left-center</a></div>    
+            </div>
+        </li> 
+        <li>
+            <div class="abTips-layer">
+                <div class="abTips-arrow-left-down1"></div>
+                <div class="abTips-textArea4"><a href="javascript:;" ab-text-left-down1="左边-居下<br>abTips-arrow-left-down">abTips-arrow-left-down</a></div>    
+            </div>
+        </li>    
+    </ul>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+
+<div class="clear"></div>
+
+
+
+<div class="clear"></div><div class="h100"></div><div class="clear"></div>
+<div class="demo-tit"><h3><a href="http://ab.geshai.com/other-plus/abTips" target="_blank">返回首页</a><span class="a2">|</span><a href="http://ab.geshai.com/other-plus/abTips" target="_blank">插件下载</a></h3></div>
+<div class="demo-text">
+    <h6>abTips基于jquery运行的文本描述提示插件</h6>
+    <p>提示框支持多种定位，自定义信息标签默认为ab-text，也可选择获取title默认信息。支持跟随鼠标<br>位置或固定位置提示。自动检测是否处于浏览器边缘，提示框总是在可见区域。<br>兼容IE6+ Safari Opera Firefox Chrome等大部分浏览器。</p>
+</div>
+<div id="tbox2"><a id="gotop2" title="返回顶部" href="javascript:scroll(0,0);">Top</a></div>
+</div>
+
+<script language="javascript">
+// 文本描述提示插件abTips调用
+$(document).ready(function () {
+	new abTips({
+		"contentEl": "a[title]", /* (HTML)绑定描述文本元素 */
+		"attr": "title", /* 描述文本属性(默认=ab-text) */
+		"textClass": "abTips-layer-text", /* 描述文本自定义class样式名 */
+		"direction": "bottom", /* 默认位置方向(默认=bottom): left=左, right=右, top=上, bottom=下 */
+		"align": "left", /* 布局排列: (direction=top|bottom): left|right|center, (direction=left|right): top|bottom|center */
+		"offsetX": -20, /* X 轴偏移(默认=0) */
+		"offsetY": 20, /* Y 轴偏移(默认=0) */
+		"speed": 80, /* 过度效果(默认=250) */
+		"maxWidth": 220, /* 最大宽度 */
+		"isMouse": true, /* 跟随鼠标(默认=false) */
+		"debug": true, /* 开发调试(默认=false) */
+		"textArrowClass": {
+			"tl": "abTips-arrow-top-left", /* 顶部-居左 */
+			"tc": "abTips-arrow-top-center", /* 顶部-居中 */
+			"tr": "abTips-arrow-top-right", /* 顶部-居右 */
+
+			"lt": "abTips-arrow-left-up", /* 左侧-顶部 */
+			"lc": "abTips-arrow-left-center", /* 左侧-居中 */
+			"lb": "abTips-arrow-left-down", /* 左侧-底部 */
+
+			"rt": "abTips-arrow-right-up", /* 右侧-顶部 */
+			"rc": "abTips-arrow-right-center", /* 右侧-居中 */
+			"rb": "abTips-arrow-right-down", /* 右侧-底部 */
+
+			"bl": "abTips-arrow-bottom-left", /* 底部-居左 */
+			"bc": "abTips-arrow-bottom-center", /* 底部-居中 */
+			"br": "abTips-arrow-bottom-right" /* 底部-居右 */
+		}
+	});
+});
+</script>
+ 
+<script language="javascript">
+ $(document).ready(function () {
+	new abTips({
+		"contentEl": "a[ab-text-top-left1]", /* (HTML)绑定描述文本元素 */
+		"attr": "ab-text-top-left1", /* 描述文本属性(默认=ab-text) */
+		"textClass": "abTips-layer-text", /* 描述文本自定义class样式名 */
+		"direction": "bottom", /* 默认位置方向(默认=bottom): left=左, right=右, top=上, bottom=下 */
+		"align": "left", /* 布局排列: (direction=top|bottom): left|right|center, (direction=left|right): top|bottom|center */
+		"offsetX": 0, /* X 轴偏移(默认=0) */
+		"offsetY": 20, /* Y 轴偏移(默认=0) */
+		"speed": 80, /* 过度效果(默认=250) */
+		"maxWidth": 200, /* 最大宽度 */
+		"isMouse": true, /* 跟随鼠标(默认=false) */
+		"debug": true, /* 开发调试(默认=false) */
+		"textArrowClass": {
+			"tl": "abTips-arrow-top-left"/* 顶部-居左 */
+		}
+	});
+}); 
+</script>
+
+<script language="javascript">
+ $(document).ready(function () {
+	new abTips({
+		"contentEl": "a[ab-text-top-center1]", /* (HTML)绑定描述文本元素 */
+		"attr": "ab-text-top-center1", /* 描述文本属性(默认=ab-text) */
+		"textClass": "abTips-layer-text", /* 描述文本自定义class样式名 */
+		"direction": "bottom", /* 默认位置方向(默认=bottom): left=左, right=右, top=上, bottom=下 */
+		"align": "center", /* 布局排列: (direction=top|bottom): left|right|center, (direction=left|right): top|bottom|center */
+		"offsetX": 0, /* X 轴偏移(默认=0) */
+		"offsetY": 20, /* Y 轴偏移(默认=0) */
+		"speed": 80, /* 过度效果(默认=250) */
+		"maxWidth": 200, /* 最大宽度 */
+		"isMouse": true, /* 跟随鼠标(默认=false) */
+		"debug": true, /* 开发调试(默认=false) */
+		"textArrowClass": {
+			"tc": "abTips-arrow-top-center" /* 顶部-居中 */
+		}
+	});
+}); 
+</script>
+
+<script language="javascript">
+ $(document).ready(function () {
+	new abTips({
+		"contentEl": "a[ab-text-top-right1]", /* (HTML)绑定描述文本元素 */
+		"attr": "ab-text-top-right1", /* 描述文本属性(默认=ab-text) */
+		"textClass": "abTips-layer-text", /* 描述文本自定义class样式名 */
+		"direction": "bottom", /* 默认位置方向(默认=bottom): left=左, right=右, top=上, bottom=下 */
+		"align": "right", /* 布局排列: (direction=top|bottom): left|right|center, (direction=left|right): top|bottom|center */
+		"offsetX": 0, /* X 轴偏移(默认=0) */
+		"offsetY": 20, /* Y 轴偏移(默认=0) */
+		"speed": 80, /* 过度效果(默认=250) */
+		"maxWidth": 200, /* 最大宽度 */
+		"isMouse": true, /* 跟随鼠标(默认=false) */
+		"debug": true, /* 开发调试(默认=false) */
+		"textArrowClass": {
+			"tr": "abTips-arrow-top-right" /* 顶部-居右 */
+		}
+	});
+}); 
+</script>
+
+<script language="javascript">
+ $(document).ready(function () {
+	new abTips({
+		"contentEl": "a[ab-text-right-up1]", /* (HTML)绑定描述文本元素 */
+		"attr": "ab-text-right-up1", /* 描述文本属性(默认=ab-text) */
+		"textClass": "abTips-layer-text", /* 描述文本自定义class样式名 */
+		"direction": "left", /* 默认位置方向(默认=bottom): left=左, right=右, top=上, bottom=下 */
+		"align": "top", /* 布局排列: (direction=top|bottom): left|right|center, (direction=left|right): top|bottom|center */
+		"offsetX": 10, /* X 轴偏移(默认=0) */
+		"offsetY": 0, /* Y 轴偏移(默认=0) */
+		"speed": 80, /* 过度效果(默认=250) */
+		"maxWidth": 200, /* 最大宽度 */
+		"isMouse": true, /* 跟随鼠标(默认=false) */
+		"debug": true, /* 开发调试(默认=false) */
+		"textArrowClass": {
+			"rt": "abTips-arrow-right-up" /* 右侧-顶部 */
+		}
+	});
+}); 
+</script>
+
+<script language="javascript">
+ $(document).ready(function () {
+	new abTips({
+		"contentEl": "a[ab-text-right-center1]", /* (HTML)绑定描述文本元素 */
+		"attr": "ab-text-right-center1", /* 描述文本属性(默认=ab-text) */
+		"textClass": "abTips-layer-text", /* 描述文本自定义class样式名 */
+		"direction": "left", /* 默认位置方向(默认=bottom): left=左, right=右, top=上, bottom=下 */
+		"align": "center", /* 布局排列: (direction=top|bottom): left|right|center, (direction=left|right): top|bottom|center */
+		"offsetX": 10, /* X 轴偏移(默认=0) */
+		"offsetY": 0, /* Y 轴偏移(默认=0) */
+		"speed": 80, /* 过度效果(默认=250) */
+		"maxWidth": 200, /* 最大宽度 */
+		"isMouse": true, /* 跟随鼠标(默认=false) */
+		"debug": true, /* 开发调试(默认=false) */
+		"textArrowClass": {
+			"rc": "abTips-arrow-right-center" /* 右侧-居中 */
+		}
+	});
+}); 
+</script>
+
+<script language="javascript">
+ $(document).ready(function () {
+	new abTips({
+		"contentEl": "a[ab-text-right-down1]", /* (HTML)绑定描述文本元素 */
+		"attr": "ab-text-right-down1", /* 描述文本属性(默认=ab-text) */
+		"textClass": "abTips-layer-text", /* 描述文本自定义class样式名 */
+		"direction": "left", /* 默认位置方向(默认=bottom): left=左, right=右, top=上, bottom=下 */
+		"align": "bottom", /* 布局排列: (direction=top|bottom): left|right|center, (direction=left|right): top|bottom|center */
+		"offsetX": 10, /* X 轴偏移(默认=0) */
+		"offsetY": 0, /* Y 轴偏移(默认=0) */
+		"speed": 80, /* 过度效果(默认=250) */
+		"maxWidth": 200, /* 最大宽度 */
+		"isMouse": true, /* 跟随鼠标(默认=false) */
+		"debug": true, /* 开发调试(默认=false) */
+		"textArrowClass": {
+			"rb": "abTips-arrow-right-down" /* 右侧-底部 */
+		}
+	});
+}); 
+</script>
+
+
+<script language="javascript">
+ $(document).ready(function () {
+	new abTips({
+		"contentEl": "a[ab-text-bottom-left1]", /* (HTML)绑定描述文本元素 */
+		"attr": "ab-text-bottom-left1", /* 描述文本属性(默认=ab-text) */
+		"textClass": "abTips-layer-text", /* 描述文本自定义class样式名 */
+		"direction": "top", /* 默认位置方向(默认=bottom): left=左, right=右, top=上, bottom=下 */
+		"align": "left", /* 布局排列: (direction=top|bottom): left|right|center, (direction=left|right): top|bottom|center */
+		"offsetX": 0, /* X 轴偏移(默认=0) */
+		"offsetY": 10, /* Y 轴偏移(默认=0) */
+		"speed": 80, /* 过度效果(默认=250) */
+		"maxWidth": 200, /* 最大宽度 */
+		"isMouse": true, /* 跟随鼠标(默认=false) */
+		"debug": true, /* 开发调试(默认=false) */
+		"textArrowClass": {
+			"bl": "abTips-arrow-bottom-left" /* 底部-居左 */
+		}
+	});
+}); 
+</script>
+
+<script language="javascript">
+ $(document).ready(function () {
+	new abTips({
+		"contentEl": "a[ab-text-bottom-center1]", /* (HTML)绑定描述文本元素 */
+		"attr": "ab-text-bottom-center1", /* 描述文本属性(默认=ab-text) */
+		"textClass": "abTips-layer-text", /* 描述文本自定义class样式名 */
+		"direction": "top", /* 默认位置方向(默认=bottom): left=左, right=右, top=上, bottom=下 */
+		"align": "center", /* 布局排列: (direction=top|bottom): left|right|center, (direction=left|right): top|bottom|center */
+		"offsetX": 0, /* X 轴偏移(默认=0) */
+		"offsetY": 10, /* Y 轴偏移(默认=0) */
+		"speed": 80, /* 过度效果(默认=250) */
+		"maxWidth": 200, /* 最大宽度 */
+		"isMouse": true, /* 跟随鼠标(默认=false) */
+		"debug": true, /* 开发调试(默认=false) */
+		"textArrowClass": {
+			"bc": "abTips-arrow-bottom-center" /* 底部-居中 */
+		}
+	});
+}); 
+</script>
+
+<script language="javascript">
+ $(document).ready(function () {
+	new abTips({
+		"contentEl": "a[ab-text-bottom-right1]", /* (HTML)绑定描述文本元素 */
+		"attr": "ab-text-bottom-right1", /* 描述文本属性(默认=ab-text) */
+		"textClass": "abTips-layer-text", /* 描述文本自定义class样式名 */
+		"direction": "top", /* 默认位置方向(默认=bottom): left=左, right=右, top=上, bottom=下 */
+		"align": "right", /* 布局排列: (direction=top|bottom): left|right|center, (direction=left|right): top|bottom|center */
+		"offsetX": 10, /* X 轴偏移(默认=0) */
+		"offsetY": 0, /* Y 轴偏移(默认=0) */
+		"speed": 80, /* 过度效果(默认=250) */
+		"maxWidth": 200, /* 最大宽度 */
+		"isMouse": true, /* 跟随鼠标(默认=false) */
+		"debug": true, /* 开发调试(默认=false) */
+		"textArrowClass": {
+			"br": "abTips-arrow-bottom-right" /* 底部-居右 */
+		}
+	});
+}); 
+</script>
+
+
+<script language="javascript">
+ $(document).ready(function () {
+	new abTips({
+		"contentEl": "a[ab-text-left-up1]", /* (HTML)绑定描述文本元素 */
+		"attr": "ab-text-left-up1", /* 描述文本属性(默认=ab-text) */
+		"textClass": "abTips-layer-text", /* 描述文本自定义class样式名 */
+		"direction": "right", /* 默认位置方向(默认=bottom): left=左, right=右, top=上, bottom=下 */
+		"align": "top", /* 布局排列: (direction=top|bottom): left|right|center, (direction=left|right): top|bottom|center */
+		"offsetX": 20, /* X 轴偏移(默认=0) */
+		"offsetY": 0, /* Y 轴偏移(默认=0) */
+		"speed": 80, /* 过度效果(默认=250) */
+		"maxWidth": 200, /* 最大宽度 */
+		"isMouse": true, /* 跟随鼠标(默认=false) */
+		"debug": true, /* 开发调试(默认=false) */
+		"textArrowClass": {
+			"lt": "abTips-arrow-left-up" /* 左侧-顶部 */
+		}
+	});
+}); 
+</script>
+
+<script language="javascript">
+ $(document).ready(function () {
+	new abTips({
+		"contentEl": "a[ab-text-left-center1]", /* (HTML)绑定描述文本元素 */
+		"attr": "ab-text-left-center1", /* 描述文本属性(默认=ab-text) */
+		"textClass": "abTips-layer-text", /* 描述文本自定义class样式名 */
+		"direction": "right", /* 默认位置方向(默认=bottom): left=左, right=右, top=上, bottom=下 */
+		"align": "center", /* 布局排列: (direction=top|bottom): left|right|center, (direction=left|right): top|bottom|center */
+		"offsetX": 20, /* X 轴偏移(默认=0) */
+		"offsetY": 0, /* Y 轴偏移(默认=0) */
+		"speed": 80, /* 过度效果(默认=250) */
+		"maxWidth": 200, /* 最大宽度 */
+		"isMouse": true, /* 跟随鼠标(默认=false) */
+		"debug": true, /* 开发调试(默认=false) */
+		"textArrowClass": {
+			"lc": "abTips-arrow-left-center" /* 左侧-居中 */
+		}
+	});
+}); 
+</script>
+
+<script language="javascript">
+ $(document).ready(function () {
+	new abTips({
+		"contentEl": "a[ab-text-left-down1]", /* (HTML)绑定描述文本元素 */
+		"attr": "ab-text-left-down1", /* 描述文本属性(默认=ab-text) */
+		"textClass": "abTips-layer-text", /* 描述文本自定义class样式名 */
+		"direction": "right", /* 默认位置方向(默认=bottom): left=左, right=右, top=上, bottom=下 */
+		"align": "bottom", /* 布局排列: (direction=top|bottom): left|right|center, (direction=left|right): top|bottom|center */
+		"offsetX": 20, /* X 轴偏移(默认=0) */
+		"offsetY": 0, /* Y 轴偏移(默认=0) */
+		"speed": 80, /* 过度效果(默认=250) */
+		"maxWidth": 200, /* 最大宽度 */
+		"isMouse": true, /* 跟随鼠标(默认=false) */
+		"debug": true, /* 开发调试(默认=false) */
+		"textArrowClass": {
+			"lb": "abTips-arrow-left-down" /* 左侧-底部 */
+		}
+	});
+}); 
+</script>
+</body>
+</html>
